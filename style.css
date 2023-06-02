@@ -26,7 +26,9 @@ body {
 
 .container {
     width: 100vw;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow-x: hidden;
 }
 
@@ -44,7 +46,7 @@ section {
     width: 500px;
     border-radius: 10px;
     border: 1px solid var(--gray);
-    padding: 75px 100px;
+    padding: 75px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,4 +224,48 @@ input[type="checkbox"]:checked:after {
 
 .under-card a:hover {
     color: var(--primary-color-darker);
+}
+
+/* Welcome card */
+.welcome-card {
+    width: auto;
+}
+
+.welcome-card h1 {
+    min-width: 350px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.welcome-card h1 span {
+    display: inline-block;
+}
+
+.wrapper {
+    margin-top: 10rem;
+    width: 100%;
+    position: relative;
+}
+
+.btn-group {
+    position: absolute;
+    right: 0;
+    user-select: none;
+}
+
+.change-password-btn {
+    width: auto;
+    margin-right: 10px;
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.change-password-btn:hover {
+    color: var(--primary-color-darker);
+    background-color: transparent;
+}
+
+.logout-btn {
+    width: auto;
+    padding: 16px;
 }
