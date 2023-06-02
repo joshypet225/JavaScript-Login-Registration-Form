@@ -16,6 +16,7 @@
 
 ::selection {
     background-color: var(--primary-color);
+    color: var(--white);
 }
 
 body {
@@ -109,20 +110,48 @@ h1 {
 
 .check-element {
     width: 350px;
-    color: var(--gray);
     margin-bottom: 3rem;
     user-select: none;
     display: flex;
     align-items: center;
+    gap: 5px;
+    cursor: pointer;
 }
 
-/* .checkbox {
-    top: 0;
-    left: 0;
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
     height: 15px;
     width: 15px;
+    background-color: var(--gray);
+    border-radius: 2px;
+    user-select: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:after {
+    display: none;
+    color: white;
+    position: absolute;
+    content: '\2714';
+    top: -1.7px;
+    left: 2px;
+}
+
+input[type="checkbox"]:checked {
     background-color: var(--primary-color);
-} */
+}
+
+input[type="checkbox"]:checked:after {
+    display: block;
+}
+
+.check-element label {
+    font-size: 16px;
+    color: var(--gray);
+    cursor: pointer;
+}
 
 .btn {
     font-size: 16px;
@@ -132,6 +161,7 @@ h1 {
     background-color: var(--primary-color);
     border-radius: 10px;
     border: none;
+    user-select: none;
     transition: .2s ease;
 }
 
