@@ -27,13 +27,14 @@ body {
 .container {
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Reusable Style */
 section {
     width: 100%;
     display: flex;
-    margin: 50px 0;
+    margin: 100px 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -203,24 +204,22 @@ input[type="checkbox"]:checked:after {
     cursor: pointer;
 }
 
-
-/* Login Page Style */
-.new-account {
+.under-card {
     margin: 1rem;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.new-account p {
+.under-card p {
     color: var(--gray);
 }
 
-.new-account a {
+.under-card a {
     text-decoration: none;
     color: var(--primary-color);
 }
 
-.new-account a:hover {
+.under-card a:hover {
     color: var(--primary-color-darker);
 }
