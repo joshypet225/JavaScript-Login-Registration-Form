@@ -234,7 +234,6 @@ input[type="checkbox"]:checked:after {
 .welcome-card h1 {
     min-width: 350px;
     text-align: center;
-    font-size: 2.5rem;
 }
 
 .welcome-card h1 span {
@@ -268,4 +267,9 @@ input[type="checkbox"]:checked:after {
 .logout-btn {
     width: auto;
     padding: 16px;
+}
+
+/* Change Password card */
+.change-password-card h1 {
+    font-size: 2.5rem;
 }

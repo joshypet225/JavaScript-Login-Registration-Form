@@ -95,7 +95,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="remember-me check-element">
+                <div class="check-element">
                     <input type="checkbox" name="reg-check" id="reg_check" value="reg-check">
                     <label for="reg_check">This account can only be used on this device.</label>
                 </div>
@@ -112,10 +112,40 @@
                 <h1>Welcome, <span>name</span></h1>
                 <div class="wrapper">
                     <div class="btn-group">
-                        <button id="change_password_btn" class="change-password-btn btn">Change password</button>
+                        <button id="change_password_btn" class="change-password-btn btn">Change Password</button>
                         <button id="logout_btn" class="logout-btn btn">LOGOUT</button>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Change Password Form -->
+        <section class="change-password-form">
+            <div class="change-password-card card">
+                <h1>Change Password</h1>
+                <div class="input-group">
+                    <div class="password-input input-box">
+                        <div class="input-box">
+                            <input type="password" id="change_password" class="input" placeholder=" ">
+                            <label for="change_password" class="input-label">New Password</label>
+                        </div>
+                        <span>
+                            <p class="mark">!</p>
+                            <p class="error-text" id="change_password_error"></p>
+                        </span>
+                    </div>
+                    <div class="password-input input-box">
+                        <div class="input-box">
+                            <input type="password" id="conchange_password" class="input" placeholder=" ">
+                            <label for="conchange_password" class="input-label">Confirm Password</label>
+                        </div>
+                        <span>
+                            <p class="mark">!</p>
+                            <p class="error-text" id="conchange_password_error"></p>
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" id="change_submit" class="change-btn btn">SUBMIT</button>
             </div>
         </section>
     </div>
