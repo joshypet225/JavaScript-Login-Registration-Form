@@ -2,4 +2,162 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+:root {
+    --black: #263238;
+    --gray: #B0BEC5;
+    --white: #ECEFF1;
+    /* --blue: #2196F3; */
+    --primary-color: #FF8A65;
+    --primary-color-darker: #FF7043;
+}
+
+::selection {
+    background-color: var(--primary-color);
+}
+
+body {
+    background-color: var(--white);
+}
+
+/* Reusable Style */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    width: 500px;
+    border-radius: 10px;
+    border: 1px solid var(--gray);
+    padding: 75px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--black);
+}
+
+.input-group {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.input-box {
+    position: relative;
+    width: 350px;
+}
+
+.input-box .input {
+    font-size: 16px;
+    color: var(--black);
+    user-select: none;
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    background-color: var(--white);
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid var(--gray);
+    transition: .2s ease;
+}
+
+.input-box .input-label {
+    background: transparent;
+    position: relative;
+    z-index: 5;
+    top: -34px;
+    left: 16px;
+    font-size: 16px;
+    color: var(--gray);
+    user-select: none;
+    cursor: text;
+    transition: .2s ease;
+}
+
+.input:focus {
+    border: 1px solid var(--primary-color);
+}
+
+.input:focus~.input-label,
+.input:not(:placeholder-shown)~.input-label {
+    background: var(--white);
+    color: var(--gray);
+    padding: 5px;
+    top: -60px;
+    left: 10px;
+    z-index: 5;
+    font-size: 12px;
+    cursor: default;
+}
+
+.input:focus~.input-label {
+    color: var(--primary-color);
+}
+
+.check-element {
+    width: 350px;
+    color: var(--gray);
+    margin-bottom: 3rem;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+/* .checkbox {
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: var(--primary-color);
+} */
+
+.btn {
+    font-size: 16px;
+    color: var(--white);
+    width: 350px;
+    height: 50px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    border: none;
+    transition: .2s ease;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-darker);
+    cursor: pointer;
+}
+
+
+/* Login Page Style */
+.new-account {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.new-account p {
+    color: var(--gray);
+}
+
+.new-account a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.new-account a:hover {
+    color: var(--primary-color-darker);
 }

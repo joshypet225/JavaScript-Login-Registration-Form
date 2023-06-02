@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +9,37 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Login Form -->
-    <div class="login-form container">
-        
+    <div class="container login-form">
+        <div class="login-card">
+            <h1>Login</h1>
+            <div class="input-group">
+                <div class="username-email-input input-box">
+                    <input type="text" id="username_email" class="input" placeholder=" ">
+                    <label for="username_email" class="input-label">Username or Email</label>
+                    <span id="username_email_error" class="error-text"></span>
+                </div>
+                <div class="password-input input-box">
+                    <input type="password" id="password" class="input" placeholder=" ">
+                    <label for="password" class="input-label">Password</label>
+                    <span id="password_error" class="error-text"></span>
+                </div>
+            </div>
+            <div class="remember-me check-element">
+                <input type="checkbox" name="remember-check" id="remember_check" value="remember" class="checkbox">
+                <label for="remember_check">Remember me</label>
+            </div>
+            <button type="submit" id="login_submit" class="login-btn btn">LOGIN</button>
+        </div>
+        <div class="new-account">
+            <p>Don't have an accout?</p><a href="#">Create</a>
+        </div>
     </div>
 
     <!-- Script -->
     <script src="script.js"></script>
 </body>
+
 </html>
