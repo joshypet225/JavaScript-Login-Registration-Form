@@ -10,7 +10,6 @@
     --gray: #B0BEC5;
     --white: #ECEFF1;
     --red: #F44336;
-    /* --blue: #2196F3; */
     --primary-color: #FF8A65;
     --primary-color-darker: #FF7043;
 }
@@ -22,6 +21,7 @@
 
 body {
     background-color: var(--white);
+    overflow-x: hidden;
 }
 
 .container {
@@ -29,7 +29,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
 }
 
 /* Reusable Style */
@@ -227,16 +226,16 @@ input[type="checkbox"]:checked:after {
 }
 
 /* Welcome card */
-.welcome-card {
+#welcome_card {
     width: auto;
 }
 
-.welcome-card h1 {
+#welcome_card h1 {
     min-width: 350px;
     text-align: center;
 }
 
-.welcome-card h1 span {
+#welcome_card h1 span {
     display: inline-block;
 }
 
@@ -252,24 +251,52 @@ input[type="checkbox"]:checked:after {
     user-select: none;
 }
 
-.change-password-btn {
+#change_password_btn {
     width: auto;
     margin-right: 10px;
     color: var(--primary-color);
     background-color: transparent;
 }
 
-.change-password-btn:hover {
+#change_password_btn:hover {
     color: var(--primary-color-darker);
     background-color: transparent;
 }
 
-.logout-btn {
+#logout_btn {
     width: auto;
     padding: 16px;
 }
 
 /* Change Password card */
-.change-password-card h1 {
+#change_password_card h1 {
     font-size: 2.5rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+    .card {
+        width: 100vw;
+        border: none;
+        padding: 0;
+        padding-bottom: 10px;
+    }
+
+    .wrapper {
+        margin-top: 20rem;
+    }
+
+    #welcome_card {
+        padding: 10px;
+    }
+
+    #welcome_card h1 {
+        max-width: 350px;
+    }
+
+    #welcome_card h1 span {
+        display: block;
+        text-align: center;
+        word-wrap: break-word;
+    }
 }

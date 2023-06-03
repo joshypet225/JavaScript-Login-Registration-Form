@@ -14,7 +14,7 @@
     <div class="container">
         <!-- Login Form -->
         <section class="login-form">
-            <div class="login-card card">
+            <div class="card">
                 <h1>Login</h1>
                 <div class="input-group">
                     <div class="username-email-input">
@@ -27,7 +27,7 @@
                             <p class="error-text" id="username_email_error"></p>
                         </span>
                     </div>
-                    <div class="password-input input-box">
+                    <div class="password-input">
                         <div class="input-box">
                             <input type="password" id="password" class="input" placeholder=" ">
                             <label for="password" class="input-label">Password</label>
@@ -38,11 +38,11 @@
                         </span>
                     </div>
                 </div>
-                <div class="remember-me check-element">
+                <div class="check-element">
                     <input type="checkbox" name="remember-check" id="remember_check" value="remember">
                     <label for="remember_check">Remember me</label>
                 </div>
-                <button type="submit" id="login_submit" class="login-btn btn">LOGIN</button>
+                <button type="submit" id="login_submit" class="btn">LOGIN</button>
             </div>
             <div class="under-card">
                 <p>Don't have an account?</p><a href="#">Create</a>
@@ -51,10 +51,10 @@
 
         <!-- Register Form -->
         <section class="signup-form">
-            <div class="signup-card card">
+            <div class="card">
                 <h1>Sign Up</h1>
                 <div class="input-group">
-                    <div class="username-input input-box">
+                    <div class="username-input">
                         <div class="input-box">
                             <input type="text" id="username" class="input" placeholder=" ">
                             <label for="username" class="input-label">Username</label>
@@ -64,7 +64,7 @@
                             <p class="error-text" id="username_error"></p>
                         </span>
                     </div>
-                    <div class="email-input input-box">
+                    <div class="email-input">
                         <div class="input-box">
                             <input type="text" id="email" class="input" placeholder=" ">
                             <label for="email" class="input-label">Email</label>
@@ -74,7 +74,7 @@
                             <p class="error-text" id="email_error"></p>
                         </span>
                     </div>
-                    <div class="password-input input-box">
+                    <div class="password-input">
                         <div class="input-box">
                             <input type="password" id="reg_password" class="input" placeholder=" ">
                             <label for="reg_password" class="input-label">Password</label>
@@ -84,7 +84,7 @@
                             <p class="error-text" id="reg_password_error"></p>
                         </span>
                     </div>
-                    <div class="password-input input-box">
+                    <div class="password-input">
                         <div class="input-box">
                             <input type="password" id="conreg_password" class="input" placeholder=" ">
                             <label for="conreg_password" class="input-label">Confirm Password</label>
@@ -99,7 +99,7 @@
                     <input type="checkbox" name="reg-check" id="reg_check" value="reg-check">
                     <label for="reg_check">This account can only be used on this device.</label>
                 </div>
-                <button type="submit" id="signup_submit" class="signup-btn btn">SIGN UP</button>
+                <button type="submit" id="signup_submit" class="btn">SIGN UP</button>
             </div>
             <div class="under-card">
                 <p>Already have an account?</p><a href="#">Login</a>
@@ -108,12 +108,12 @@
 
         <!-- Welcome -->
         <section class="welcome-form">
-            <div class="welcome-card card">
+            <div class="card" id="welcome_card">
                 <h1>Welcome, <span>name</span></h1>
                 <div class="wrapper">
                     <div class="btn-group">
-                        <button id="change_password_btn" class="change-password-btn btn">Change Password</button>
-                        <button id="logout_btn" class="logout-btn btn">LOGOUT</button>
+                        <button id="change_password_btn" class="btn">Change Password</button>
+                        <button id="logout_btn" class="btn">LOGOUT</button>
                     </div>
                 </div>
             </div>
@@ -121,10 +121,10 @@
 
         <!-- Change Password Form -->
         <section class="change-password-form">
-            <div class="change-password-card card">
+            <div class="card" id="change_password_card">
                 <h1>Change Password</h1>
                 <div class="input-group">
-                    <div class="password-input input-box">
+                    <div class="password-input">
                         <div class="input-box">
                             <input type="password" id="change_password" class="input" placeholder=" ">
                             <label for="change_password" class="input-label">New Password</label>
@@ -134,7 +134,7 @@
                             <p class="error-text" id="change_password_error"></p>
                         </span>
                     </div>
-                    <div class="password-input input-box">
+                    <div class="password-input">
                         <div class="input-box">
                             <input type="password" id="conchange_password" class="input" placeholder=" ">
                             <label for="conchange_password" class="input-label">Confirm Password</label>
@@ -145,7 +145,7 @@
                         </span>
                     </div>
                 </div>
-                <button type="submit" id="change_submit" class="change-btn btn">SUBMIT</button>
+                <button type="submit" id="change_submit" class="btn">SUBMIT</button>
             </div>
         </section>
     </div>
