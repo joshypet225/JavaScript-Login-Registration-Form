@@ -22,11 +22,11 @@ const regCheck = document.getElementById('reg_check');
 const regButton = document.getElementById('signup_submit');
 
 // Check Username
+const usernameRegEx = /^[A-Za-z0-9_.]{0,25}$/;
 let rUchk, rUchka, rUchks = true;
 
 regUsername.addEventListener('input', () => {
     const usernameErrorDisplay = document.getElementById('username_error');
-    const usernameRegEx = /^[A-Za-z0-9_.]{0,25}$/;
     if (!(regUsername.value.match(usernameRegEx))) {
         showError(regUsername, usernameErrorDisplay,
             'Username can only use letters, number, underscores and periods.');
@@ -65,6 +65,7 @@ function checkUsername() {
 }
 
 // Check Email
+const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let rEchk, rEchks = true;
 
 function checkSameEmail() {
@@ -78,7 +79,6 @@ function checkSameEmail() {
 function checkEmail() {
     checkSameEmail()
     const emailErrorDisplay = document.getElementById('email_error');
-    const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (regEmail.value === '') {
         showError(regEmail, emailErrorDisplay,
             "Email can't be empty.");
@@ -176,4 +176,68 @@ regButton.addEventListener('click', async () => {
     await checkPassword();
     await checkPasswordConfirm()
     await saveData();
+})
+
+// Login ------------------------------------------------------------------>
+const logUsernameOrEmail = document.getElementById('username_email');
+const logPassword = document.getElementById('password');
+const logCheck = document.getElementById('remember_check');
+const logButton = document.getElementById('login_submit');
+let account;
+
+// Check Username or Email
+const logUsernameOrEmailErrorDisplay = document.getElementById('username_email_error');
+function getAccout() {
+    if (logUsernameOrEmail.value === '') {
+        showError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay,
+            "Please enter your username or email.");
+    } else if (logUsernameOrEmail.value.match(usernameRegEx)) {
+        checkLoginAccount('username');
+        hideError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay);
+    } else if (logUsernameOrEmail.value.match(emailRegEx)) {
+        checkLoginAccount('email');
+        hideError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay);
+    } else {
+        showError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay,
+            "Invalid username or email.");
+    }
+}
+
+function checkLoginAccount(input) {
+    data.forEach(item => {
+        if (item[input] === logUsernameOrEmail.value) {
+            account = item;
+        }
+    })
+}
+
+// Check Password
+const logPasswordErrorDisplay = document.getElementById('password_error');
+function checkLoginPassword() {
+    if (account === undefined) {
+        showError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay,
+            "Invalid username or email.");
+    } else if (account['password'] === logPassword.value) {
+        logUsernameOrEmail.value = '';
+        logPassword.value = '';
+        logCheckbox();
+        hideError(logPassword, logPasswordErrorDisplay);
+    } else {
+        showError(logPassword, logPasswordErrorDisplay,
+            "Invalid Password.");
+        logPassword.value = '';
+    }
+}
+
+// Checkbox
+function logCheckbox() {
+    if (logCheck.checked === true) {
+        localStorage.setItem('Remember', account['username']);
+    }
+}
+
+// Login Click
+logButton.addEventListener('click', async () => {
+    await getAccout();
+    await checkLoginPassword();
 })
