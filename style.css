@@ -7,6 +7,7 @@
 
 :root {
     --black: #263238;
+    --dark-gray: #90A4AE;
     --gray: #B0BEC5;
     --white: #ECEFF1;
     --red: #F44336;
@@ -216,6 +217,14 @@ input[type="checkbox"]:checked:after {
     background-color: var(--primary-color);
 }
 
+.cancel-btn {
+    background-color: var(--gray);
+}
+
+.cancel-btn:hover {
+    background-color: var(--dark-gray);
+}
+
 .under-card {
     margin: 1rem;
     display: flex;
@@ -287,6 +296,10 @@ input[type="checkbox"]:checked:after {
 /* Change Password card */
 #change_password_card h1 {
     font-size: 2.5rem;
+}
+
+#change_cancel {
+    margin-top: 15px;
 }
 
 /* Responsive */

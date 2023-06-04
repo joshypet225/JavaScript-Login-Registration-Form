@@ -282,9 +282,20 @@ function toWelcome() {
     showCard('welcome-form');
 }
 
+// Change Password Click
+const changePasswordButton = document.getElementById('change_password_btn');
+changePasswordButton.addEventListener('click', () => showCard('change-password-form'));
+
 // Logout
 const logoutButton = document.getElementById('logout_btn');
 logoutButton.addEventListener('click', () => {
     showCard('login-form');
     localStorage.removeItem('Remember');
 });
+
+// Change Password -------------------------------------------------------->
+
+
+// Cancel Click
+const changeCancelButton = document.getElementById('change_cancel');
+changeCancelButton.addEventListener('click', () => showCard('welcome-form'));
