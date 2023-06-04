@@ -45,7 +45,7 @@
                 <button type="submit" id="login_submit" class="btn">LOGIN</button>
             </div>
             <div class="under-card">
-                <p>Don't have an account?</p><a href="#">Create</a>
+                <p>Don't have an account?</p><button id="to_signup">Create</button>
             </div>
         </section>
 
@@ -102,14 +102,14 @@
                 <button type="submit" id="signup_submit" class="btn" disabled>SIGN UP</button>
             </div>
             <div class="under-card">
-                <p>Already have an account?</p><a href="#">Login</a>
+                <p>Already have an account?</p><button id="to_login">Login</button>
             </div>
         </section>
 
         <!-- Welcome -->
         <section class="welcome-form">
             <div class="card" id="welcome_card">
-                <h1>Welcome, <span>name</span></h1>
+                <h1>Welcome, <span id="name_output">name</span></h1>
                 <div class="wrapper">
                     <div class="btn-group">
                         <button id="change_password_btn" class="btn">Change Password</button>

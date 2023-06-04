@@ -1,4 +1,29 @@
 const data = JSON.parse(localStorage.getItem('Account'));
+const remember = localStorage.getItem('Remember');
+let account;
+
+// Show Card
+const card = document.querySelectorAll('section');
+function showCard(form) {
+    card.forEach(element => {
+        if (element.className === form) {
+            element.style.display = '';
+        } else {
+            element.style.display = 'none';
+        }
+    })
+}
+
+if (remember === null) {
+    showCard('login-form');
+} else {
+    data.forEach((item) => {
+        if (item["username"] === remember) {
+            account = item;
+        }
+    });
+    toWelcome();
+}
 
 // Show Error
 function showError(box, display, error) {
@@ -178,12 +203,15 @@ regButton.addEventListener('click', async () => {
     await saveData();
 })
 
+// Create Click
+const toLogin = document.getElementById('to_login');
+toLogin.addEventListener('click', () => { showCard('login-form') });
+
 // Login ------------------------------------------------------------------>
 const logUsernameOrEmail = document.getElementById('username_email');
 const logPassword = document.getElementById('password');
 const logCheck = document.getElementById('remember_check');
 const logButton = document.getElementById('login_submit');
-let account;
 
 // Check Username or Email
 const logUsernameOrEmailErrorDisplay = document.getElementById('username_email_error');
@@ -221,6 +249,7 @@ function checkLoginPassword() {
         logUsernameOrEmail.value = '';
         logPassword.value = '';
         logCheckbox();
+        toWelcome();
         hideError(logPassword, logPasswordErrorDisplay);
     } else {
         showError(logPassword, logPasswordErrorDisplay,
@@ -241,3 +270,21 @@ logButton.addEventListener('click', async () => {
     await getAccout();
     await checkLoginPassword();
 })
+
+// Login Click
+const toSignUp = document.getElementById('to_signup');
+toSignUp.addEventListener('click', () => { showCard('signup-form') });
+
+// Welcome ---------------------------------------------------------------->
+function toWelcome() {
+    const nameOutput = document.getElementById('name_output');
+    nameOutput.innerHTML = account['username'];
+    showCard('welcome-form');
+}
+
+// Logout
+const logoutButton = document.getElementById('logout_btn');
+logoutButton.addEventListener('click', () => {
+    showCard('login-form');
+    localStorage.removeItem('Remember');
+});
