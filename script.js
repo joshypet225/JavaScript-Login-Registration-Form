@@ -419,6 +419,7 @@ function saveChange() {
             await data.push(account);
             await localStorage.setItem('Account', JSON.stringify(data));
             await (() => {
+                localStorage.removeItem('Remember');
                 clearChangePassword();
                 toSuccessLink('Change Password Success');
             })();
