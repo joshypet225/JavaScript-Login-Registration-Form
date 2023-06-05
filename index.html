@@ -110,11 +110,10 @@
         <section class="welcome-form">
             <div class="card" id="welcome_card">
                 <h1>Welcome, <span id="name_output">name</span></h1>
-                <div class="wrapper">
-                    <div class="btn-group">
-                        <button id="change_password_btn" class="btn">Change Password</button>
-                        <button id="logout_btn" class="btn">LOGOUT</button>
-                    </div>
+                <div class="btn-group">
+                    <button id="change_password_btn" class="cancel-btn btn">Change Password</button>
+                    <button id="delete_account_btn" class="cancel-btn btn">Delete Account</button>
+                    <button id="logout_btn" class="btn">LOGOUT</button>
                 </div>
             </div>
         </section>
@@ -155,8 +154,29 @@
                         </span>
                     </div>
                 </div>
-                <button type="submit" id="change_submit" class="btn">SUBMIT</button>
-                <button type="submit" id="change_cancel" class="cancel-btn btn">CANCEL</button>
+                <div class="btn-group">
+                    <button type="submit" id="change_submit" class="btn">SUBMIT</button>
+                    <button type="submit" id="change_cancel" class="cancel-btn btn">CANCEL</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delete Account Form -->
+        <section class="delete-account-form">
+            <div class="card" id="delete_account_card">
+                <h1>Delete Account</h1>
+                <div class="btn-group">
+                    <button type="submit" id="delete_confirm" class="btn">CONFIRM</button>
+                    <button type="submit" id="delete_cancel" class="cancel-btn btn">CANCEL</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Form -->
+        <section class="success-form">
+            <div class="card" id="success_card">
+                <h1 id="success_text">Success text</h1>
+                <button type="submit" id="success_continue" class="btn">CONTINUE</button>
             </div>
         </section>
     </div>

@@ -2,6 +2,10 @@ let data = JSON.parse(localStorage.getItem('Account'));
 const remember = localStorage.getItem('Remember');
 let account;
 
+if (data === null) {
+    data = [];
+}
+
 // Show Card
 const card = document.querySelectorAll('section');
 function showCard(form) {
@@ -47,11 +51,11 @@ const regCheck = document.getElementById('reg_check');
 const regButton = document.getElementById('signup_submit');
 
 // Check Username
+const usernameErrorDisplay = document.getElementById('username_error');
 const usernameRegEx = /^[A-Za-z0-9_.]{0,25}$/;
 let rUchk, rUchka, rUchks = true;
 
 regUsername.addEventListener('input', () => {
-    const usernameErrorDisplay = document.getElementById('username_error');
     if (!(regUsername.value.match(usernameRegEx))) {
         showError(regUsername, usernameErrorDisplay,
             'Username can only use letters, number, underscores and periods.');
@@ -63,15 +67,16 @@ regUsername.addEventListener('input', () => {
 })
 
 function checkSameUsername() {
-    data.forEach(item => {
-        if (item["username"] === regUsername.value) {
-            rUchks = false;
-        }
-    })
+    if (data !== [] && data !== null) {
+        data.forEach(item => {
+            if (item["username"] === regUsername.value) {
+                rUchks = false;
+            }
+        })
+    }
 }
 
 function checkUsername() {
-    const usernameErrorDisplay = document.getElementById('username_error');
     checkSameUsername();
     if (regUsername.value === '') {
         showError(regUsername, usernameErrorDisplay,
@@ -90,20 +95,22 @@ function checkUsername() {
 }
 
 // Check Email
+const emailErrorDisplay = document.getElementById('email_error');
 const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let rEchk, rEchks = true;
 
 function checkSameEmail() {
-    data.forEach(item => {
-        if (item["email"] === regEmail.value) {
-            rEchks = false;
-        }
-    })
+    if (data !== []) {
+        data.forEach(item => {
+            if (item["email"] === regEmail.value) {
+                rEchks = false;
+            }
+        })
+    }
 }
 
 function checkEmail() {
     checkSameEmail()
-    const emailErrorDisplay = document.getElementById('email_error');
     if (regEmail.value === '') {
         showError(regEmail, emailErrorDisplay,
             "Email can't be empty.");
@@ -122,10 +129,10 @@ function checkEmail() {
 }
 
 // Check Password
+const passwordErrorDisplay = document.getElementById('reg_password_error');
 let rPchk = true;
 
 function checkPassword() {
-    const passwordErrorDisplay = document.getElementById('reg_password_error');
     if (regPassword.value === '') {
         showError(regPassword, passwordErrorDisplay,
             "Password can't be empty.");
@@ -137,31 +144,30 @@ function checkPassword() {
 }
 
 // Check Password Confirm
-let rPCchk, rPCchka = true;
+const regPasswordConfirmErrorDisplay = document.getElementById('conreg_password_error');
+let rPCchka, rPCchk = true;
 
 regPasswordConfirm.addEventListener('change', () => {
-    const passwordConfirmErrorDisplay = document.getElementById('conreg_password_error');
     if (regPasswordConfirm.value !== regPassword.value) {
-        showError(regPasswordConfirm, passwordConfirmErrorDisplay,
+        showError(regPasswordConfirm, regPasswordConfirmErrorDisplay,
             'Passwords do not match.');
         rPCchka = false;
     } else {
-        hideError(regPasswordConfirm, passwordConfirmErrorDisplay);
+        hideError(regPasswordConfirm, regPasswordConfirmErrorDisplay);
         rPCchka = true;
     }
 })
 
 function checkPasswordConfirm() {
-    const passwordConfirmErrorDisplay = document.getElementById('conreg_password_error');
     if (regPasswordConfirm.value === '') {
-        showError(regPasswordConfirm, passwordConfirmErrorDisplay,
+        showError(regPasswordConfirm, regPasswordConfirmErrorDisplay,
             "Passwords can't be empty.");
         rPCchk = false;
     } else if (!rPCchka) {
         rPCchk = false;
     } else {
-        hideError(regPasswordConfirm, passwordConfirmErrorDisplay);
         rPCchk = true;
+        hideError(regPasswordConfirm, regPasswordConfirmErrorDisplay);
     }
 }
 
@@ -184,10 +190,8 @@ function saveData() {
         };
         data.push(newAccount);
         localStorage.setItem('Account', JSON.stringify(data));
-        regUsername.value = '';
-        regEmail.value = '';
-        regPassword.value = '';
-        regPasswordConfirm.value = '';
+        clearSignup();
+        showCard('login-form');
     } else {
         regPassword.value = '';
         regPasswordConfirm.value = '';
@@ -205,7 +209,23 @@ regButton.addEventListener('click', async () => {
 
 // Create Click
 const toLoginButton = document.getElementById('to_login');
-toLoginButton.addEventListener('click', () => { showCard('login-form') });
+toLoginButton.addEventListener('click', () => {
+    showCard('login-form');
+    clearSignup();
+});
+
+// Clear Signup Page
+function clearSignup() {
+    regUsername.value = '';
+    hideError(regUsername, usernameErrorDisplay);
+    regEmail.value = '';
+    hideError(regEmail, emailErrorDisplay);
+    regPassword.value = '';
+    hideError(regPassword, passwordErrorDisplay);
+    regPasswordConfirm.value = '';
+    hideError(regPasswordConfirm, regPasswordConfirmErrorDisplay);
+    regCheck.checked = false;
+}
 
 // Login ------------------------------------------------------------------>
 const logUsernameOrEmail = document.getElementById('username_email');
@@ -273,7 +293,19 @@ logButton.addEventListener('click', async () => {
 
 // Login Click
 const toSignUpButton = document.getElementById('to_signup');
-toSignUpButton.addEventListener('click', () => { showCard('signup-form') });
+toSignUpButton.addEventListener('click', () => {
+    showCard('signup-form');
+    clearLogin();
+});
+
+// Clear Login Page
+function clearLogin() {
+    logUsernameOrEmail.value = '';
+    hideError(logUsernameOrEmail, logUsernameOrEmailErrorDisplay);
+    logPassword.value = '';
+    hideError(logPassword, logPasswordErrorDisplay);
+    logCheck.checked = false;
+}
 
 // Welcome ---------------------------------------------------------------->
 function toWelcome() {
@@ -286,6 +318,10 @@ function toWelcome() {
 const changePasswordButton = document.getElementById('change_password_btn');
 changePasswordButton.addEventListener('click', () => showCard('change-password-form'));
 
+// Delete Account Click
+const deleteAccountButton = document.getElementById('delete_account_btn');
+deleteAccountButton.addEventListener('click', () => showCard('delete-account-form'));
+
 // Logout
 const logoutButton = document.getElementById('logout_btn');
 logoutButton.addEventListener('click', () => {
@@ -294,12 +330,12 @@ logoutButton.addEventListener('click', () => {
 });
 
 // Change Password -------------------------------------------------------->
-// Check New Password
+// Check Current Password
 const currentPassword = document.getElementById('current_password');
+const currentPasswordErrorDisplay = document.getElementById('current_password_error');
 let cCPchk;
 
 function checkCurrentPassword() {
-    const currentPasswordErrorDisplay = document.getElementById('current_password_error');
     if (currentPassword.value === '') {
         showError(currentPassword, currentPasswordErrorDisplay,
             "Password can't be empty.");
@@ -317,11 +353,10 @@ function checkCurrentPassword() {
 
 // Check New Password
 const changePassword = document.getElementById('change_password');
-const changePasswordConfirm = document.getElementById('conchange_password');
+const changePasswordErrorDisplay = document.getElementById('change_password_error');
 let cPchk;
 
 function checkPassword() {
-    const changePasswordErrorDisplay = document.getElementById('change_password_error');
     if (changePassword.value === '') {
         showError(changePassword, changePasswordErrorDisplay,
             "Password can't be empty.");
@@ -333,12 +368,13 @@ function checkPassword() {
 }
 
 // Check Password Confirm
+const changePasswordConfirm = document.getElementById('conchange_password');
+const changePasswordConfirmErrorDisplay = document.getElementById('conchange_password_error');
 let cPCchk, cPCchka;
 
 changePasswordConfirm.addEventListener('change', checkPasswordConfirmOnchange);
 
 function checkPasswordConfirmOnchange() {
-    const changePasswordConfirmErrorDisplay = document.getElementById('conchange_password_error');
     if (changePasswordConfirm.value !== changePassword.value) {
         showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
             'Passwords do not match.');
@@ -351,7 +387,6 @@ function checkPasswordConfirmOnchange() {
 
 function checkPasswordConfirm() {
     checkPasswordConfirmOnchange();
-    const changePasswordConfirmErrorDisplay = document.getElementById('conreg_password_error');
     if (changePasswordConfirm.value === '') {
         showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
             "Passwords can't be empty.");
@@ -366,7 +401,10 @@ function checkPasswordConfirm() {
 
 // Cancel Click
 const changeCancelButton = document.getElementById('change_cancel');
-changeCancelButton.addEventListener('click', () => showCard('welcome-form'));
+changeCancelButton.addEventListener('click', () => {
+    showCard('welcome-form');
+    clearChangePassword();
+});
 
 // Save Data
 function saveChange() {
@@ -381,12 +419,14 @@ function saveChange() {
             await data.push(account);
             await localStorage.setItem('Account', JSON.stringify(data));
             await (() => {
-                currentPassword.value = '';
-                changePassword.value = '';
-                changePasswordConfirm.value = '';
+                clearChangePassword();
+                toSuccessLink('Change Password Success');
             })();
-            await toWelcome();
         })();
+    } else {
+        currentPassword.value = '';
+        changePassword.value = '';
+        changePasswordConfirm.value = '';
     }
 }
 
@@ -398,3 +438,41 @@ changeSubmitButton.addEventListener('click', async () => {
     await checkPasswordConfirm();
     await saveChange();
 });
+
+// Clear Change Password Page
+function clearChangePassword() {
+    currentPassword.value = '';
+    hideError(currentPassword, currentPasswordErrorDisplay);
+    changePassword.value = '';
+    hideError(changePassword, changePasswordErrorDisplay);
+    changePasswordConfirm.value = '';
+    hideError(changePasswordConfirm, changePasswordConfirmErrorDisplay);
+}
+
+// Delete Account --------------------------------------------------------->
+// Confirm Click
+const deleteConfirmButton = document.getElementById('delete_confirm');
+deleteConfirmButton.addEventListener('click', async () => {
+    await toSuccessLink('Delete Account Success');
+    await (() => {
+        data = data.filter(item => item !== account);
+    })();
+    await localStorage.setItem('Account', JSON.stringify(data));
+    await localStorage.removeItem('Remember');
+});
+
+// Cancel Click
+const deleteAccountCancelButton = document.getElementById('delete_cancel');
+deleteAccountCancelButton.addEventListener('click', () => showCard('welcome-form'));
+
+// Success Card ----------------------------------------------------------->
+const successText = document.getElementById('success_text');
+
+function toSuccessLink(text) {
+    successText.innerHTML = (text);
+    showCard('success-form');
+}
+
+// Continue Click
+const successButton = document.getElementById('success_continue');
+successButton.addEventListener('click', () => showCard('login-form'));
