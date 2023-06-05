@@ -1,4 +1,4 @@
-const data = JSON.parse(localStorage.getItem('Account'));
+let data = JSON.parse(localStorage.getItem('Account'));
 const remember = localStorage.getItem('Remember');
 let account;
 
@@ -294,8 +294,76 @@ logoutButton.addEventListener('click', () => {
 });
 
 // Change Password -------------------------------------------------------->
+// Check Password
+const changePassword = document.getElementById('change_password');
+const changePasswordConfirm = document.getElementById('conchange_password');
+let cPchk;
 
+function checkPassword() {
+    const changePasswordErrorDisplay = document.getElementById('change_password_error');
+    if (changePassword.value === '') {
+        showError(changePassword, changePasswordErrorDisplay,
+            "Password can't be empty.");
+        cPchk = false;
+    } else {
+        hideError(changePassword, changePasswordErrorDisplay);
+        cPchk = true;
+    }
+}
+
+// Check Password Confirm
+let cPCchk, cPCchka;
+
+changePasswordConfirm.addEventListener('change', () => {
+    const changePasswordConfirmErrorDisplay = document.getElementById('conchange_password_error');
+    if (changePasswordConfirm.value !== changePassword.value) {
+        showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
+            'Passwords do not match.');
+        cPCchka = false;
+    } else {
+        hideError(changePasswordConfirm, changePasswordConfirmErrorDisplay);
+        cPCchka = true;
+    }
+})
+
+function checkPasswordConfirm() {
+    const changePasswordConfirmErrorDisplay = document.getElementById('conreg_password_error');
+    if (changePasswordConfirm.value === '') {
+        showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
+            "Passwords can't be empty.");
+        cPCchk = false;
+    } else if (!cPCchka) {
+        cPCchk = false;
+    } else {
+        hideError(changePasswordConfirm, changePasswordConfirmErrorDisplay);
+        cPCchk = true;
+    }
+}
 
 // Cancel Click
 const changeCancelButton = document.getElementById('change_cancel');
 changeCancelButton.addEventListener('click', () => showCard('welcome-form'));
+
+// Save Data
+function saveChange() {
+    if (cPchk && cPCchk && cPCchka) {
+        (async () => {
+            await (() => {
+                data = data.filter(item => item !== account);
+            })();
+            await (() => {
+                account.password = changePassword.value;
+            })();
+            await data.push(account);
+            await localStorage.setItem('Account', JSON.stringify(data));
+        })();
+    }
+}
+
+// Submit Click
+const changeSubmitButton = document.getElementById('change_submit');
+changeSubmitButton.addEventListener('click', async () => {
+    await checkPassword();
+    await checkPasswordConfirm();
+    await saveChange();
+});
