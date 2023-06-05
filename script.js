@@ -204,8 +204,8 @@ regButton.addEventListener('click', async () => {
 })
 
 // Create Click
-const toLogin = document.getElementById('to_login');
-toLogin.addEventListener('click', () => { showCard('login-form') });
+const toLoginButton = document.getElementById('to_login');
+toLoginButton.addEventListener('click', () => { showCard('login-form') });
 
 // Login ------------------------------------------------------------------>
 const logUsernameOrEmail = document.getElementById('username_email');
@@ -272,8 +272,8 @@ logButton.addEventListener('click', async () => {
 })
 
 // Login Click
-const toSignUp = document.getElementById('to_signup');
-toSignUp.addEventListener('click', () => { showCard('signup-form') });
+const toSignUpButton = document.getElementById('to_signup');
+toSignUpButton.addEventListener('click', () => { showCard('signup-form') });
 
 // Welcome ---------------------------------------------------------------->
 function toWelcome() {
@@ -294,7 +294,28 @@ logoutButton.addEventListener('click', () => {
 });
 
 // Change Password -------------------------------------------------------->
-// Check Password
+// Check New Password
+const currentPassword = document.getElementById('current_password');
+let cCPchk;
+
+function checkCurrentPassword() {
+    const currentPasswordErrorDisplay = document.getElementById('current_password_error');
+    if (currentPassword.value === '') {
+        showError(currentPassword, currentPasswordErrorDisplay,
+            "Password can't be empty.");
+        cCPchk = false;
+    } else if (currentPassword.value !== account.password) {
+        showError(currentPassword, currentPasswordErrorDisplay,
+            "Wrong password.");
+        currentPassword.value = '';
+        cCPchk = false;
+    } else {
+        hideError(currentPassword, currentPasswordErrorDisplay);
+        cCPchk = true;
+    }
+}
+
+// Check New Password
 const changePassword = document.getElementById('change_password');
 const changePasswordConfirm = document.getElementById('conchange_password');
 let cPchk;
@@ -314,7 +335,9 @@ function checkPassword() {
 // Check Password Confirm
 let cPCchk, cPCchka;
 
-changePasswordConfirm.addEventListener('change', () => {
+changePasswordConfirm.addEventListener('change', checkPasswordConfirmOnchange);
+
+function checkPasswordConfirmOnchange() {
     const changePasswordConfirmErrorDisplay = document.getElementById('conchange_password_error');
     if (changePasswordConfirm.value !== changePassword.value) {
         showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
@@ -324,9 +347,10 @@ changePasswordConfirm.addEventListener('change', () => {
         hideError(changePasswordConfirm, changePasswordConfirmErrorDisplay);
         cPCchka = true;
     }
-})
+}
 
 function checkPasswordConfirm() {
+    checkPasswordConfirmOnchange();
     const changePasswordConfirmErrorDisplay = document.getElementById('conreg_password_error');
     if (changePasswordConfirm.value === '') {
         showError(changePasswordConfirm, changePasswordConfirmErrorDisplay,
@@ -346,7 +370,7 @@ changeCancelButton.addEventListener('click', () => showCard('welcome-form'));
 
 // Save Data
 function saveChange() {
-    if (cPchk && cPCchk && cPCchka) {
+    if (cCPchk && cPchk && cPCchk && cPCchka) {
         (async () => {
             await (() => {
                 data = data.filter(item => item !== account);
@@ -356,6 +380,12 @@ function saveChange() {
             })();
             await data.push(account);
             await localStorage.setItem('Account', JSON.stringify(data));
+            await (() => {
+                currentPassword.value = '';
+                changePassword.value = '';
+                changePasswordConfirm.value = '';
+            })();
+            await toWelcome();
         })();
     }
 }
@@ -363,6 +393,7 @@ function saveChange() {
 // Submit Click
 const changeSubmitButton = document.getElementById('change_submit');
 changeSubmitButton.addEventListener('click', async () => {
+    await checkCurrentPassword();
     await checkPassword();
     await checkPasswordConfirm();
     await saveChange();
